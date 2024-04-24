@@ -1,0 +1,22 @@
+
+awk -F: '{
+print $1,",",$4,"+"
+}' /etc/passwd | awk -F+ '{
+for(i=2; i<NF; i+=2){if($i==$i++)}
+}'
+
+awk -F: '{
+print $4,"+",$3;
+}' /etc/passwd | sort -n | awk -F+ '
+BEGIN{
+    x=-5;
+    sum=0;
+}
+{
+if($1==x){sum=sum+$2}
+x=$1;
+}
+END{
+print sum;
+}
+'
